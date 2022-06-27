@@ -1,5 +1,14 @@
 class Solution:
     def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+        """
+        Requirements
+        Examples
+        Solve
+        Pseudocode
+        Code
+        Test
+        
+        """
         original_color = image[sr][sc]
         
         if original_color == color: return image
