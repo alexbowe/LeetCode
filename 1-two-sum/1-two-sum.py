@@ -4,6 +4,6 @@ class Solution:
         for i,x in enumerate(nums):
             delta = target - x
             if delta in deltas:
-                return [deltas[delta],i]
+                return [deltas[delta], i]
             deltas[x] = i
         return []
