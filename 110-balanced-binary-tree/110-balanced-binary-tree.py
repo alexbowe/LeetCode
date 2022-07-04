@@ -9,11 +9,10 @@ class Solution:
         def helper(root):
             if not root: return True, 0
             
-            left_balanced, left_height = helper(root.left)
-            if not left_balanced: return False, 0
-            
+            left_balanced, left_height = helper(root.left)            
             right_balanced, right_height = helper(root.right)
-            if not right_balanced: return False, 0
+            if (left_balanced, right_balanced) != (True, True):
+                return False, max(left_height, right_height)
             
             return abs(left_height - right_height) <= 1, 1+max(left_height, right_height)
         
