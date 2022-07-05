@@ -11,4 +11,4 @@ class Solution:
             curr.next = prev
             prev = curr
             curr = temp
-            if not curr: return prev
+        return prev
