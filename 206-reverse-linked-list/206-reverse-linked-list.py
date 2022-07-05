@@ -9,13 +9,11 @@ class Solution:
         1 2 3 4 5
         
         """
-        def helper(curr):
-            if not curr: return (None, None)
-            if not curr.next: return (curr, curr)
-            successor, head = helper(curr.next)
-            successor.next = curr
-            curr.next = None
-            return (curr, head)
+        def helper(curr, prev=None):
+            if not curr: return None
+            temp = curr.next
+            curr.next = prev
+            if not temp: return curr
+            return helper(temp, curr)
         
-        _, head = helper(head)
-        return head
+        return helper(head)
