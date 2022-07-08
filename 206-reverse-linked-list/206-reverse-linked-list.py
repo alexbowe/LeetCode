@@ -10,5 +10,4 @@ class Solution:
             temp = curr.next
             curr.next = prev
             return helper(temp, curr)
-        
         return helper(head)
