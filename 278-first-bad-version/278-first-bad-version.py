@@ -4,10 +4,10 @@
 class Solution:
     def firstBadVersion(self, n: int) -> int:
         left, right = 1, n
-        while left < right:
-            x = left + (right - left)//2
-            if isBadVersion(x):
-                right = x
+        while left<right:
+            m = left + (right-left)//2
+            if isBadVersion(m):
+                right = m
             else:
-                left = x+1
+                left = m+1
         return left
