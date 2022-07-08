@@ -20,6 +20,7 @@ class MyQueue:
     def empty(self) -> bool:
         return not self._inbox and not self._outbox
 
+
 # Your MyQueue object will be instantiated and called as such:
 # obj = MyQueue()
 # obj.push(x)
