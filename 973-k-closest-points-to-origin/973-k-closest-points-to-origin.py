@@ -7,8 +7,10 @@ class Solution:
         
         heap = []
         for x in points:
-            heapq.heappush(heap, (-d(x), x))
-            if len(heap) > k:
-                heapq.heappop(heap)
+            dist = d(x)
+            if len(heap) + 1 > k:
+                heapq.heappushpop(heap, (-dist, x))
+            else:
+                heapq.heappush(heap, (-dist, x))
         
         return [x for _,x in heap]
