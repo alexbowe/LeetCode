@@ -1,23 +1,21 @@
 class Solution:
     def addBinary(self, a: str, b: str) -> str:
         """
-        
-        iterate from right to left
-        carry is (a+b)%2
-        
-        1
-        1
+        11
+        01
         """
-        n = max(len(a), len(b))
-        bits = []
         carry = 0
-        for i in range(n):
-            x = int(a[-i-1]) if i < len(a) else 0
-            y = int(b[-i-1]) if i < len(b) else 0
-            val = x + y + carry
-            carry = val//2
-            bits.append(val%2)
+        bits = []
         
-        if carry > 0: bits.append(carry)
+        a = list(a)
+        b = list(b)
         
-        return "".join([str(x) for x in bits][::-1])
+        while a or b or carry>0:
+            x = int(a.pop()) if a else 0
+            y = int(b.pop()) if b else 0
+            total = x + y + carry
+            bit = total%2
+            carry = total//2
+            bits.append(str(bit))
+        
+        return "".join(bits[::-1])
