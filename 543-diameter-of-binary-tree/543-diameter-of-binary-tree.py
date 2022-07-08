@@ -7,25 +7,17 @@
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         """
-                         1
-                 2               3
-             4       5       6       7
-           8   9   A   B   C   D   E   F
-          G H I J K L M N O P Q R S T U V
         """
+        
         def helper(root):
-            # Return height, max_diameter
-            if not root: return (0,0)
+            if not root: return (0, 0)
             
-            left_height, left_diameter = helper(root.left)
-            right_height, right_diameter = helper(root.right)
+            dl, hl = helper(root.left)
+            dr, hr = helper(root.right)
             
-            height = 1+max(left_height, right_height)
-            diameter = max(left_diameter, right_diameter, left_height + right_height)
-            return height, diameter
+            h = max(hl, hr) + 1
+            d = max(dl, dr, hl+hr)
+            return (d, h)
         
-        _, diameter = helper(root)
-        return diameter
-            
-        
-        
+        d, _ = helper(root)
+        return d
