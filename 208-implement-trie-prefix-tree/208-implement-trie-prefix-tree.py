@@ -1,20 +1,18 @@
-from collections import defaultdict
-def tree_node(): return defaultdict(tree_node)
-
-TERMINAL = "$"
+def tree_node(): return collections.defaultdict(tree_node)
 
 class Trie:
+
     def __init__(self):
         self._root = tree_node()
         self._root["$"]
 
     def insert(self, word: str) -> None:
         curr = self._root
-        for x in word + TERMINAL:
+        for x in word + "$":
             curr = curr[x]
 
     def search(self, word: str) -> bool:
-        return self.startsWith(word+TERMINAL)
+        return self.startsWith(word+"$")
 
     def startsWith(self, prefix: str) -> bool:
         curr = self._root
