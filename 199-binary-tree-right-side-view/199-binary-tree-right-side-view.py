@@ -7,8 +7,8 @@
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         result = []
-        level = [root]
-        while root and level:
+        level = [root] if root else []
+        while level:
             result.append(level[-1].val)
             level = [c for x in level for c in [x.left, x.right] if c]
         return result
