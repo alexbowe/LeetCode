@@ -15,9 +15,9 @@ class Solution:
             "9":"wxyz",
         }
         
-        results = list(letters[digits[0]])
+        results = [""]
         
-        for x in digits[1:]:
+        for x in digits:
             results = [z+l for z in results for l in letters[x]]
         
         return results
