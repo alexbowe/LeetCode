@@ -2,22 +2,17 @@ class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         nums.sort()
         
-        def twoSum(nums, start, target):
-            deltas = dict()
-            for j in range(start, len(nums)):
-                x = nums[j]
-                delta = target - x
-                if delta in deltas:
-                    yield (deltas[delta], j)
-                deltas[x] = j
+        def twoSum(xs, start, target):
+            indices = dict()
+            for i in range(start,len(xs)):
+                d = target-xs[i]
+                if d in indices:
+                    yield (indices[d], i)
+                indices[xs[i]] = i
         
         result = set()
-        for i in range(len(nums)-2):
-            if i > 0 and nums[i] == nums[i-1]: continue
+        for i in range(len(nums)-1):
+            for j,k in twoSum(nums, i+1, -nums[i]):
+                result.add((nums[i], nums[j], nums[k]))
                 
-            target = -nums[i]
-            for j,k in twoSum(nums, i+1, target):
-                if i in (j,k): continue
-                result.add((nums[i],nums[j],nums[k]))
-        
         return list(result)
