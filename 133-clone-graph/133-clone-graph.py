@@ -9,20 +9,22 @@ class Node:
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
         if not node: return None
-        nodes = dict()
-        neighbors = dict()
+        
+        root_key = node.val
+        nodes = {}
+        edges = {}
         stack = [node]
         
         while stack:
             curr = stack.pop()
-            if curr.val in nodes: continue
+            nodes[curr.val] = Node(val=curr.val)
+            edges[curr.val] = [n.val for n in curr.neighbors]
             
-            nodes[curr.val] = Node(val = curr.val)
-            neighbors[curr.val] = [x.val for x in curr.neighbors]
-            
-            stack.extend(curr.neighbors)
+            for n in curr.neighbors:
+                if n.val in nodes: continue
+                stack.append(n)
         
-        for v,ns in neighbors.items():
-            nodes[v].neighbors = [nodes[n] for n in ns]
+        for v in nodes.keys():
+            nodes[v].neighbors = [nodes[n] for n in edges[v]]
         
-        return nodes[node.val]
+        return nodes[root_key]
