@@ -5,15 +5,14 @@
 #         self.next = next
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        def iterate_list(curr):
+        def iter_list(curr):
             while curr:
-                temp = curr
+                yield curr
                 curr = curr.next
-                yield temp
         
         prev = dummy = ListNode()
-        for x in heapq.merge(*(iterate_list(l) for l in lists), key=lambda x:x.val):
-            prev.next = x
-            prev = x
-        
+        for n in heapq.merge(*map(iter_list,lists), key=lambda x:x.val):
+            prev.next = n
+            prev = n
+            
         return dummy.next
