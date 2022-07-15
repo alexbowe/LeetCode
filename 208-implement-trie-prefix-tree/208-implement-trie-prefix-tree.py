@@ -8,7 +8,7 @@ class Trie:
 
     def insert(self, word: str) -> None:
         curr = self._root
-        for x in word + "$":
+        for x in word+"$":
             curr = curr[x]
 
     def search(self, word: str) -> bool:
