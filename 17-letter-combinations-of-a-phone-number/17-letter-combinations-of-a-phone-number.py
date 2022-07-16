@@ -2,7 +2,7 @@ class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
         if not digits: return []
         
-        letters = {
+        d = {
             "0": " ",
             "1": "",
             "2": "abc",
@@ -16,8 +16,10 @@ class Solution:
         }
         
         level = [""]
-        for d in digits:
-            level = [l + x for l in level for x in letters[d]]
-        
+        for x in digits:
+            new_level = []
+            for y in d[x]:
+                for s in level:
+                    new_level.append(s+y)
+            level = new_level
         return level
-        
