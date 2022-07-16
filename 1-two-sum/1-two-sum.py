@@ -1,8 +1,8 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        deltas = dict()
+        diffs = dict()
         for i,x in enumerate(nums):
-            delta = target - x
-            if delta in deltas:
-                return (deltas[delta], i)
-            deltas[x] = i
+            d = target - x
+            if d in diffs:
+                return (diffs[d], i)
+            diffs[x] = i
