@@ -1,23 +1,12 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        """
-        
-         1  2  3  4
-         1  2  6 24
-              12  4 1
-              
-        24 12  8  6
-        
-        """
-        left = 1
         temp = [1]
-        for i in range(len(nums)):
-            left = left * nums[i]
-            temp.append(left)
+        for x in nums:
+            temp.append(temp[-1]*x)
         
         right = 1
         for i in reversed(range(len(nums))):
-            temp[1+i] = temp[i] * right
+            temp[i+1] = right * temp[i]
             right = right * nums[i]
-            
+        
         return temp[1:]
