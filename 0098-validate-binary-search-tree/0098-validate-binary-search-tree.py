@@ -9,7 +9,7 @@ class Solution:
         def inorder(root):
             if not root: return
             yield from inorder(root.left)
-            yield root.val
+            yield root
             yield from inorder(root.right)
             
         def pairs(xs):
@@ -18,4 +18,4 @@ class Solution:
             next(b,None)
             return zip(a,b)
         
-        return all(a<b for a,b in pairs(inorder(root)))
+        return all(a.val<b.val for a,b in pairs(inorder(root)))
