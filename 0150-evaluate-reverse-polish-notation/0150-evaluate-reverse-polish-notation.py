@@ -14,4 +14,5 @@ class Solution:
                 b = stack.pop()
                 a = stack.pop()
                 stack.append(ops[token](a,b))
+        assert len(stack) == 1
         return stack[-1]
