@@ -6,16 +6,18 @@
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         from heapq import merge
-        def iter_list(xs):
+        
+        def list_iter(xs):
             while xs:
                 yield xs
                 xs = xs.next
         
-        merged = merge(*[iter_list(xs) for xs in lists], key=lambda x: x.val)
+        merged = merge(*[list_iter(x) for x in lists], key=lambda x: x.val)
         
         head = ListNode()
         prev = head
         for x in merged:
             prev.next = x
             prev = x
+        
         return head.next
