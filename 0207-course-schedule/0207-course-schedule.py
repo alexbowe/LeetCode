@@ -15,8 +15,7 @@ class Solution:
         sources = find_indegree_zero(g)
         
         while sources:
-            u = sources.pop(0)
-            # delete all outgoing edges u,v
+            u = sources.pop()
             while g[u]["out"]:
                 v = g[u]["out"].pop()
                 g[v]["in"].remove(u)
