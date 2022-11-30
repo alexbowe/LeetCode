@@ -11,6 +11,7 @@ class Solution:
         left = [1]
         for x in nums:
             left.append(left[-1]*x)
+            prev = x
         
         right = 1
         for i in reversed(range(1, len(left))):
