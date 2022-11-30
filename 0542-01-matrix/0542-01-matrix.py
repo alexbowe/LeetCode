@@ -18,7 +18,7 @@ class Solution:
                 # If there were no zeros before this point, we are infinitely far away
                 down = mat[r+1][c] if r+1<height else float("inf")
                 right = mat[r][c+1] if c+1<width else float("inf")
-                # Include previous calculation in min check
+                # Include previous up-left-min in min check
                 mat[r][c] = min(min(down, right) + 1, mat[r][c])
         
         return mat
