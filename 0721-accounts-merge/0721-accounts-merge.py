@@ -20,11 +20,6 @@ class UnionFind:
 
 class Solution:
     def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
-        """
-        - go through all accounts, add connections to UF
-        - go through all accounts again, find each email in UF to get canonical email (CE)
-        -- Use CE -> Name
-        """
         uf = UnionFind()
         
         for name, *emails in accounts:
