@@ -27,16 +27,14 @@ class Solution:
             for email in emails[1:]:
                 uf.union(emails[0], email)
         
-        mapping = defaultdict(set)
-        for _, *emails in accounts:
-            key = uf.find(emails[0])
-            mapping[key].update(emails)
-            
-        result = []
+        mapping = defaultdict(lambda: {"name": None, "emails": set()})
         for name, *emails in accounts:
             key = uf.find(emails[0])
-            if key not in mapping: continue
-            result.append([name] + sorted(mapping[key]))
-            del mapping[key]
+            mapping[key]["name"] = name
+            mapping[key]["emails"].update(emails)
+            
+        result = []
+        for entry in mapping.values():
+            result.append([entry["name"]] + sorted(entry["emails"]))
         
         return result
