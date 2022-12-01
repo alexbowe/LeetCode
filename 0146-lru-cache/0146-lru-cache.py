@@ -2,18 +2,18 @@ class ListNode:
     def __init__(self, key=None, val=None):
         self.key = key
         self.val = val
-        self.next = None
         self.prev = None
-        
+        self.next = None
+    
     def disconnect(self):
         if self.prev: self.prev.next = self.next
         if self.next: self.next.prev = self.prev
-        self.next = None
         self.prev = None
+        self.next = None
     
     def post_insert(self, other):
-        other.next = self.next
         other.prev = self
+        other.next = self.next
         if self.next: self.next.prev = other
         self.next = other
 
@@ -24,8 +24,7 @@ class LRUCache:
         self.d = dict()
         self.list_head = ListNode()
         self.list_tail = ListNode()
-        self.list_head.next = self.list_tail
-        self.list_tail.prev = self.list_head
+        self.list_head.post_insert(self.list_tail)
 
     def get(self, key: int) -> int:
         if key not in self.d: return -1
@@ -35,17 +34,19 @@ class LRUCache:
         return node.val
 
     def put(self, key: int, value: int) -> None:
-        self.get(key)
-        
         if key in self.d:
-            self.d[key].val = value
+            node = self.d[key]
+            node.val = value
+            node.disconnect()
+            self.list_head.post_insert(node)
             return
         
         if len(self.d) == self.capacity:
-            del self.d[self.list_tail.prev.key]
-            self.list_tail.prev.disconnect()
-            
-        self.d[key] = ListNode(key=key,val=value)
+            tail = self.list_tail.prev
+            tail.disconnect()
+            del self.d[tail.key]
+        
+        self.d[key] = ListNode(key=key, val=value)
         self.list_head.post_insert(self.d[key])
 
 
