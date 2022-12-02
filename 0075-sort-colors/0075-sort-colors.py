@@ -1,6 +1,5 @@
 class Solution:
     def sortColors(self, nums: List[int]) -> None:
         c = collections.Counter(nums)
-        nums[:] = []
-        for color, count in sorted(c.items()):
-            nums.extend([color]*count)
+        nums[:] = [0] * c[0] + [1] * c[1] + [2] * c[2]
+            
