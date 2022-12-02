@@ -8,7 +8,7 @@ class TimeMap:
 
     def set(self, key: str, value: str, timestamp: int) -> None:
         entry = self._d[key]
-        pos = bisect_left(entry["times"], timestamp)
+        pos = bisect_right(entry["times"], timestamp)
         entry["times"].insert(pos, timestamp)
         entry["vals"].insert(pos, value)
 
