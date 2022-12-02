@@ -1,23 +1,15 @@
-from bisect import bisect_right
-
 class TimeMap:
-
     def __init__(self):
-        from collections import defaultdict
-        self._d = defaultdict(lambda: {"vals": [], "times":[]})
+        self.values = collections.defaultdict(list)
+        self.times = collections.defaultdict(list)
 
     def set(self, key: str, value: str, timestamp: int) -> None:
-        entry = self._d[key]
-        pos = bisect_right(entry["times"], timestamp)
-        entry["times"].insert(pos, timestamp)
-        entry["vals"].insert(pos, value)
+        self.values[key].append(value)
+        self.times[key].append(timestamp)
 
     def get(self, key: str, timestamp: int) -> str:
-        if key not in self._d: return ""
-        entry = self._d[key]
-        pos = bisect_right(entry["times"], timestamp) - 1
-        if pos < 0: return ""
-        return entry["vals"][pos]
+        pos = bisect.bisect(self.times[key], timestamp)-1
+        return self.values[key][pos] if pos>=0 else ""
 
 # Your TimeMap object will be instantiated and called as such:
 # obj = TimeMap()
