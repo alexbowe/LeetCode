@@ -1,5 +1,4 @@
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
-        # m + n - 2 = the total number of downs/rights (the required length of the path)
-        # n - 1 = the positions to move to right
-        return math.comb(m + n - 2, n - 1)
+        # From m + n - 2 directions, choose n - 1 moves to the right
+        return math.comb(m+n-2, min(m-1,n-1))
