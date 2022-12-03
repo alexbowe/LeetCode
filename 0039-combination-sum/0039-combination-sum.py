@@ -1,12 +1,11 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        def helper(nums, target):
-            if target < 0:  return
-            if target == 0: yield []
-            yield from (
-                [nums[i]] + solution
-                for i in range(len(nums))
-                for solution in helper(nums[i:], target-nums[i])
-            )
-            
-        return list(helper(candidates, target))
+        solutions = []
+        q = [([], candidates, target)]
+        while q:
+            partial, candidates, target = q.pop()
+            if target < 0: continue
+            if target == 0: solutions.append(partial)
+            for i in range(len(candidates)):
+                q.append((partial+[candidates[i]], candidates[i:], target-candidates[i]))
+        return solutions
