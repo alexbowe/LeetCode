@@ -1,10 +1,8 @@
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        if not s: return True
-        
-        words = sorted(wordDict, key=lambda x: -len(x))
-        seen = set()
+        words = set(wordDict) - {""}
         stack = [s]
+        seen = set()
         while stack:
             curr = stack.pop()
             if curr == "": return True
@@ -14,5 +12,4 @@ class Solution:
                 if new_word in seen: continue
                 seen.add(new_word)
                 stack.append(new_word)
-        
         return False
