@@ -5,51 +5,44 @@ class ListNode:
         self.prev = None
         self.next = None
     
-    def disconnect(self):
+    def remove(self):
         if self.prev: self.prev.next = self.next
         if self.next: self.next.prev = self.prev
         self.prev = None
         self.next = None
-    
-    def post_insert(self, other):
-        other.prev = self
-        other.next = self.next
+        
+    def postinsert(self, other):
         if self.next: self.next.prev = other
+        other.next = self.next
+        other.prev = self
         self.next = other
 
 class LRUCache:
 
     def __init__(self, capacity: int):
-        self.capacity = capacity
-        self.d = dict()
-        self.list_head = ListNode()
-        self.list_tail = ListNode()
-        self.list_head.post_insert(self.list_tail)
+        self._capacity = capacity
+        self._d = dict()
+        self._list_head = ListNode()
+        self._list_tail = ListNode()
+        self._list_head.postinsert(self._list_tail)
 
     def get(self, key: int) -> int:
-        if key not in self.d: return -1
-        node = self.d[key]
-        node.disconnect()
-        self.list_head.post_insert(node)
+        if key not in self._d: return -1
+        node = self._d[key]
+        node.remove()
+        self._list_head.postinsert(node)
         return node.val
 
     def put(self, key: int, value: int) -> None:
-        if key in self.d:
-            node = self.d[key]
-            node.val = value
-            node.disconnect()
-            self.list_head.post_insert(node)
-            return
+        if self.get(key) == -1:
+            if len(self._d) == self._capacity:
+                tail = self._list_tail.prev
+                tail.remove()
+                del self._d[tail.key]
+            self._d[key] = ListNode(key=key, val=value)
+            self._list_head.postinsert(self._d[key])
+        else: self._d[key].val = value
         
-        if len(self.d) == self.capacity:
-            tail = self.list_tail.prev
-            tail.disconnect()
-            del self.d[tail.key]
-        
-        self.d[key] = ListNode(key=key, val=value)
-        self.list_head.post_insert(self.d[key])
-
-
 # Your LRUCache object will be instantiated and called as such:
 # obj = LRUCache(capacity)
 # param_1 = obj.get(key)
