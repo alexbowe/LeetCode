@@ -1,11 +1,11 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        result = []
-        q = [([], candidates, target)]
+        result = set()
+        q = [([], target)]
         while q:
-            partial, options, target = q.pop()
+            partial, target = q.pop()
             if target < 0: continue
-            if target == 0: result.append(partial)
-            for i in range(len(options)):
-                q.append((partial + [options[i]], options[i:], target-options[i]))
+            if target == 0: result.add(tuple(sorted(partial)))
+            for i in range(len(candidates)):
+                q.append((partial + [candidates[i]], target-candidates[i]))
         return result
