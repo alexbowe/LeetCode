@@ -1,11 +1,13 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        q = [(0,0)]
+        n = 0
+        level = {0}
         seen = set()
-        while q:
-            n,total = q.pop(0)
-            if total == amount: return n
-            q.extend((n+1,total+c) for c in coins if total+c<=amount and total+c not in seen)
-            seen.update(total+c for c in coins)
-        return -1
+        while level:
+            if amount in level: return n
+            level = {x+c for c in coins for x in level if x+c <=amount if x+c not in seen}
+            seen.update(level)
+            n += 1
             
+        return -1
+        
