@@ -1,7 +1,6 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        nums.sort()
         result = [[]]
         for x in nums:
-            result.extend([subset + [x] for subset in result])
+            result += [r+[x] for r in result]
         return result
