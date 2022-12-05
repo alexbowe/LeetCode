@@ -5,8 +5,8 @@ class Solution:
         seen = set()
         while level:
             if amount in level: return n
-            level = {x+c for c in coins for x in level if x+c <=amount if x+c not in seen}
             seen.update(level)
+            level = {x+c for c in coins for x in level if x+c <=amount if x+c not in seen}
             n += 1
             
         return -1
