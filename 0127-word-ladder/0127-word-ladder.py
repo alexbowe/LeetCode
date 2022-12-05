@@ -1,17 +1,14 @@
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
-        def new_words(w):
-            alpha = "abcdefghijklmnopqrstuvwxyz"
-            return [w[:i] + c + w[i+1:] for c in alpha for i in range(len(w))]
-        
-        n = 0
+        def new_word(w):
+            alphabet = "abcdefghijklmnopqrstuvwxyz"
+            return [w[:i]+c+w[i+1:] for c in alphabet for i in range(len(w))]
         words = set(wordList)
-        level = set([beginWord])
-        while level:
+        n = 0
+        q = {beginWord}
+        while q:
             n+=1
-            if endWord in level: return n
-            level = {nw for w in level for nw in new_words(w) if nw in words}
-            words.difference_update(level)
-        
+            if endWord in q: return n
+            q = {nw for w in q for nw in new_word(w) if nw in words}
+            words.difference_update(q)
         return 0
-        
