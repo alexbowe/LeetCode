@@ -1,11 +1,8 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        result = []
-        q = [([], candidates, target)]
-        while q:
-            partial, options, t = q.pop()
-            if t < 0: continue
-            if t == 0: result.append(partial)
+        def helper(partial, options, t):
+            if t < 0: return
+            if t == 0: yield partial
             for i in range(len(options)):
-                q.append((partial + [options[i]], options[i:], t-options[i]))
-        return result
+                yield from helper(partial + [options[i]], options[i:], t-options[i])
+        return list(helper([], candidates, target))
