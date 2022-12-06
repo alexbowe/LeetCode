@@ -4,8 +4,8 @@ class Solution:
         while lo<=hi:
             mid = lo+(hi-lo)//2
             
-            same_side = (nums[0] > nums[mid]) == (nums[0] > target)
-            sentinel = -float("inf") if nums[0] > target else float("inf")
+            same_side = (nums[0] <= nums[mid]) == (nums[0] <= target)
+            sentinel = float("inf") if nums[0] <= target else -float("inf")
             num = nums[mid] if same_side else sentinel
             
             if num == target: return mid
