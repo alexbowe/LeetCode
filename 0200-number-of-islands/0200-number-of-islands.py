@@ -2,7 +2,7 @@ class UnionFind:
     def __init__(self):
         self._parent = dict()
         self._rank = collections.defaultdict(int)
-        
+    
     def find(self, x):
         if x not in self._parent: self._parent[x] = x
         if x == self._parent[x]: return x
@@ -12,13 +12,13 @@ class UnionFind:
     def union(self, x, y):
         x = self.find(x)
         y = self.find(y)
-        x,y = sorted([x,y], key=lambda x: self._rank[x])
+        x,y = sorted([x,y], key=self._rank.__getitem__)
         self._parent[y] = x
         self._rank[x] += self._rank[x] == self._rank[y]
     
     def count(self):
-        return sum(1 for x,px in self._parent.items() if x == px)
-
+        return sum(1 for x,p in self._parent.items() if x==p)
+        
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
         H,W = len(grid), len(grid[0])
@@ -31,10 +31,9 @@ class Solution:
         
         uf = UnionFind()
         for r,c in product(range(H), range(W)):
-            if grid[r][c] == "0": continue
+            if grid[r][c] != "1": continue
             uf.find((r,c))
             for nr,nc in neighbors(r,c):
-                if grid[nr][nc] == "0": continue
+                if grid[nr][nc] != "1": continue
                 uf.union((r,c), (nr,nc))
-        
         return uf.count()
