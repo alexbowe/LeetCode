@@ -9,6 +9,7 @@ class Solution:
         
         g = make_graph(prerequisites)
         roots = [v for v,node in g.items() if node["indegree"] == 0]
+        
         while roots:
             c = roots.pop()
             course = g[c]
@@ -16,6 +17,6 @@ class Solution:
                 g[out]["indegree"] -= 1
                 if g[out]["indegree"] == 0: roots.append(out)
             del g[c]
-        return not bool(g)
-            
+        return not g
+        
             
