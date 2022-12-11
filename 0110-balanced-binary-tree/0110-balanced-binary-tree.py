@@ -10,6 +10,5 @@ class Solution:
             if not root: return True, 0
             lb, lh = helper(root.left)
             rb, rh = helper(root.right)
-            return lb and rb and abs(lh-rh)<=1, max(lh, rh) + 1
-        is_balanced, height = helper(root)
-        return is_balanced
+            return lb and rb and abs(lh-rh)<=1, max(lh,rh)+1
+        return helper(root)[0]
