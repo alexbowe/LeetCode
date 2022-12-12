@@ -23,14 +23,14 @@ class Codec:
         :type data: str
         :rtype: TreeNode
         """
-        def helper(data = iter(data.split())):
+        def helper(data):
             val = next(data)
             if val == "#": return None
             node = TreeNode(int(val))
             node.left = helper(data)
             node.right = helper(data)
             return node
-        return helper()
+        return helper(iter(data.split()))
 
 # Your Codec object will be instantiated and called as such:
 # ser = Codec()
