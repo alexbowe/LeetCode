@@ -23,13 +23,12 @@ class Codec:
         :type data: str
         :rtype: TreeNode
         """
-        data = iter(data.split())
-        def helper():
+        def helper(data = iter(data.split())):
             val = next(data)
             if val == "#": return None
             node = TreeNode(int(val))
-            node.left = helper()
-            node.right = helper()
+            node.left = helper(data)
+            node.right = helper(data)
             return node
         return helper()
 
