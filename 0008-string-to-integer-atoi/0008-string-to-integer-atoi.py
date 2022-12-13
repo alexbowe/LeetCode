@@ -1,7 +1,6 @@
 class Solution:
     def myAtoi(self, s: str) -> int:
-        MIN = -2**31
-        MAX = 2**31 - 1
+        MIN, MAX = -2**31, 2**31 - 1
         
         sign, value = 1, 0
         for i,x in enumerate(s.lstrip(" ")):
