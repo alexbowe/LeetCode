@@ -31,6 +31,7 @@ class Codec:
             node.right = helper(tokens)
             return node
         return helper(data.split())
+        
 
 # Your Codec object will be instantiated and called as such:
 # ser = Codec()
