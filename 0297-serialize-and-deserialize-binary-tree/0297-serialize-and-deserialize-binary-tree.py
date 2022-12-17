@@ -15,7 +15,6 @@ class Codec:
         """
         if not root: return "#"
         return f"{root.val} {self.serialize(root.left)} {self.serialize(root.right)}"
-        
 
     def deserialize(self, data):
         """Decodes your encoded data to tree.
@@ -24,9 +23,9 @@ class Codec:
         :rtype: TreeNode
         """
         def helper(tokens):
-            val = tokens.pop(0)
-            if val == "#": return None
-            node = TreeNode(int(val))
+            x = tokens.pop(0)
+            if x == "#": return None
+            node = TreeNode(int(x))
             node.left = helper(tokens)
             node.right = helper(tokens)
             return node
