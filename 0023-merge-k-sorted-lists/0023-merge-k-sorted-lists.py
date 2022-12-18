@@ -5,18 +5,17 @@
 #         self.next = next
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        from heapq import merge
-        def list_iter(xs):
+        def iterlist(xs):
             while xs:
                 yield xs
                 xs = xs.next
         
-        merged = merge(*[list_iter(l) for l in lists], key=lambda x: x.val)
+        merged = heapq.merge(*[iterlist(xs) for xs in lists], key=lambda x:x.val)
         
         head = ListNode()
         prev = head
-        for x in merged:
-            prev.next = x
-            prev = x
-        
+        for curr in merged:
+            prev.next = curr
+            prev = curr
+            curr = curr.next
         return head.next
