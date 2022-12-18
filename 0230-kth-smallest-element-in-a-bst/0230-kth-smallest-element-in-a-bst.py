@@ -11,4 +11,4 @@ class Solution:
             yield from inorder(root.left)
             yield root
             yield from inorder(root.right)
-        return next(x.val for i,x in enumerate(inorder(root)) if i == k-1)
+        return next(x.val for i,x in enumerate(inorder(root), 1) if i==k)
