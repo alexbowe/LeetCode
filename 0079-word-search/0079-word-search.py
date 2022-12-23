@@ -26,4 +26,4 @@ class Solution:
             seen.remove((r,c))
             return result
         
-        return any(search((r,c)) for r,c in product(range(H),range(W)) if board[r][c] == word[0])
+        return any(search((r,c)) for r,c in product(range(H),range(W)))
