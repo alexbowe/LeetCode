@@ -17,17 +17,15 @@ class UnionFind:
         self._rank[x] += self._rank[x] == self._rank[y]
     
     def count(self):
-        return sum(1 for x,p in self._parent.items() if x==p)
-        
+        return sum(1 for x,p in self._parent.items() if x == p)
+    
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
         H,W = len(grid), len(grid[0])
         
         def neighbors(r,c):
-            if r-1>=0: yield (r-1,c)
-            if c-1>=0: yield (r,c-1)
-            if  r+1<H: yield (r+1,c)
-            if  c+1<W: yield (r,c+1)
+            dirs = [(-1,0),(1,0),(0,-1),(0,1)]
+            return [(r+dr,c+dc) for dr,dc in dirs if 0<=r+dr<H and 0<=c+dc<W]
         
         uf = UnionFind()
         for r,c in product(range(H), range(W)):
