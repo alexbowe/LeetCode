@@ -21,5 +21,5 @@ class Solution:
             elif x == ")":
                 sign, prev_result = stack.pop(), stack.pop()
                 result = prev_result + sign*result
-                sign = 1
+                #sign = 1
         return result
