@@ -1,6 +1,7 @@
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         if not word: return True
+        if not board: return False
         
         H,W = len(board), len(board[0])
         
