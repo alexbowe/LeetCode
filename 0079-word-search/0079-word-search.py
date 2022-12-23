@@ -17,17 +17,14 @@ class Solution:
         
         positions = [(r,c) for r,c in product(range(H), range(W)) if board[r][c] == word[0]]
         
-        visited_at_position = set()
         def dfs(pos, i=0, visited=None):
             visited = visited or set()
             r,c = pos
             if i == len(word): return True
             if any([r<0, c<0, r>=H, c>=W]): return False
             if (r,c) in visited: return False
-            #if (i,r,c) in visited_at_position: return False
             if board[r][c] != word[i]: return False
             visited.add((r,c))
-            visited_at_position.add((i,r,c))
             result = any([
                 dfs((r+1,c), i+1, visited),
                 dfs((r,c+1), i+1, visited),
