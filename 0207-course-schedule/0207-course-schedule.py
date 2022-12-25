@@ -1,22 +1,20 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         def make_graph(prerequisites):
-            g = collections.defaultdict(lambda: {"out": set(), "indegree": 0})
-            for course,prereq in prerequisites:
-                g[course]["indegree"] += 1
-                g[prereq]["out"].add(course)
+            g = collections.defaultdict(lambda: {"indegree":0, "out": set()})
+            for v,u in prerequisites:
+                g[u]["out"].add(v)
+                g[v]["indegree"]+=1
             return g
         
         g = make_graph(prerequisites)
-        roots = [v for v,node in g.items() if node["indegree"] == 0]
+        starts = {v for v,node in g.items() if node["indegree"] == 0}
         
-        while roots:
-            c = roots.pop()
-            course = g[c]
-            for out in course["out"]:
-                g[out]["indegree"] -= 1
-                if g[out]["indegree"] == 0: roots.append(out)
-            del g[c]
+        while starts:
+            u = starts.pop()
+            for v in g[u]["out"]:
+                g[v]["indegree"]-=1
+                if g[v]["indegree"] == 0: starts.add(v)
+            del g[u]
+        
         return not g
-        
-            
