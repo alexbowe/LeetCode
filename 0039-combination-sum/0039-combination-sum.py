@@ -4,5 +4,5 @@ class Solution:
             if t < 0: return
             if t == 0: yield partial
             for i in range(len(options)):
-                yield from helper(partial + [options[i]], options[i:], t-options[i])
+                yield from helper(partial+[options[i]], options[i:], t-options[i])
         return list(helper([], candidates, target))
