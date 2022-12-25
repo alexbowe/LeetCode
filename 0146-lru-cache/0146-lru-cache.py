@@ -36,13 +36,8 @@ class LRUCache:
 
     def put(self, key: int, value: int) -> None:
         if self.get(key) != -1: self._d[key].val = value; return
-        
-        if len(self._d) == self._capacity:
-            k = self._list_tail.prev.remove().key
-            del self._d[k]
-            
-        self._d[key] = ListNode(key,value)
-        self._list_head.postinsert(self._d[key])
+        if len(self._d) == self._capacity: del self._d[self._list_tail.prev.remove().key]
+        self._d[key] = self._list_head.postinsert(ListNode(key,value)).next
             
 
 # Your LRUCache object will be instantiated and called as such:
