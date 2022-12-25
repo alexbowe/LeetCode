@@ -11,5 +11,5 @@ class Solution:
         return TreeNode(
             preorder[0],
             self.buildTree(preorder[1:i+1], inorder[:i]),
-            self.buildTree(preorder[i+1:],  inorder[i+1:]),
+            self.buildTree(preorder[i+1:], inorder[i+1:]),
         )
