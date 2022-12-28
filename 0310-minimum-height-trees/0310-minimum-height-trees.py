@@ -13,16 +13,12 @@ class Solution:
         
         leaves = [v for v,neighbors in g.items() if len(neighbors)==1]
         
-        while leaves:
-            if len(g) <= 2: return list(g.keys())
-            
+        while leaves and len(g) > 2:
             new_leaves = []
             for v in leaves:
                 u = g[v].pop()
                 del g[v]
                 g[u].remove(v)
                 if len(g[u]) == 1: new_leaves.append(u)
-            
             leaves = new_leaves
-        
-        return []
+        return leaves
