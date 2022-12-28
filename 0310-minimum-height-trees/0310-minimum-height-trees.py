@@ -12,8 +12,7 @@ class Solution:
         g = make_graph(edges)
         
         leaves = [v for v,neighbors in g.items() if len(neighbors)==1]
-        
-        while leaves and len(g) > 2:
+        while len(g) > 2:
             new_leaves = []
             for v in leaves:
                 u = g[v].pop()
