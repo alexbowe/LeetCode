@@ -23,13 +23,13 @@ class Codec:
         :rtype: TreeNode
         """
         def helper(tokens):
-            x = tokens.pop()
-            if x == "#": return None
+            x = tokens.pop(0)
+            if x == "#": return
             node = TreeNode(int(x))
             node.left = helper(tokens)
             node.right = helper(tokens)
             return node
-        return helper(data.split()[::-1])
+        return helper(data.split())
         
 
 # Your Codec object will be instantiated and called as such:
