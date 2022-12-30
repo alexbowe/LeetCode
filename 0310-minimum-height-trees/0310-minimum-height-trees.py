@@ -6,17 +6,17 @@ class Solution:
                 g[u].add(v)
                 g[v].add(u)
             return g
-        g = make_graph(n,edges)
         
-        leaves = [u for u,neighbors in g.items() if len(neighbors)<=1]
+        g = make_graph(n, edges)
+        leaves = [v for v,neighbors in g.items() if len(neighbors)<=1]
         
-        while len(g) > 2:
+        while len(g)>2:
             new_leaves = []
-            for u in leaves:
-                v = g[u].pop()
-                g[v].remove(u)
-                del g[u]
-                if len(g[v]) == 1: new_leaves.append(v)
+            for v in leaves:
+                u = g[v].pop()
+                g[u].remove(v)
+                del g[v]
+                if len(g[u]) == 1: new_leaves.append(u)
             leaves = new_leaves
         
         return leaves
