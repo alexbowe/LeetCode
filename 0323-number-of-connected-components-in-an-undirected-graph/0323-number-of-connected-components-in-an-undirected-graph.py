@@ -23,6 +23,6 @@ class Solution:
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
         uf = UnionFind()
         for v in range(n): uf.find(v)
-        for u,v in edges:
-            uf.union(u,v)
+        for u,v in edges:  uf.union(u,v)
         return uf.count()
+    
