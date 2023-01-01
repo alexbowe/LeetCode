@@ -2,7 +2,6 @@ class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
         prefix = ""
         for group in zip(*strs):
-            s = set(group)
-            if len(s) != 1: break
-            prefix += s.pop()
+            if not all(x == group[0] for x in group): break
+            prefix += group[0]
         return prefix
