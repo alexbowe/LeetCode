@@ -1,3 +1,3 @@
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
-        return reduce(int.__xor__, itertools.chain(range(len(nums)+1),nums))
+        return reduce(int.__xor__, nums)^reduce(int.__xor__, range(len(nums)+1))
