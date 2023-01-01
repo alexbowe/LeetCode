@@ -3,4 +3,4 @@ class Solution:
         N = len(nums)
         nums[:] = (x for x in nums if x != 0)
         n_zeros = N-len(nums)
-        nums.extend([0]*n_zeros)
+        nums.extend((0 for _ in range(n_zeros)))
