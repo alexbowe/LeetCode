@@ -4,14 +4,15 @@ class WordDictionary:
         self._root = collections.defaultdict(WordDictionary)
 
     def addWord(self, word: str) -> None:
+        self.search.cache_clear()
         if not word: self._root["$"]; return
         self._root[word[0]].addWord(word[1:])
 
+    @functools.cache
     def search(self, word: str) -> bool:
         if not word: return "$" in self._root
-        if word[0] == ".": return any(node.search(word[1:]) for node in self._root.values())
+        if word[0] == ".": return any(x.search(word[1:]) for x in self._root.values())
         return word[0] in self._root and self._root[word[0]].search(word[1:])
-            
 
 # Your WordDictionary object will be instantiated and called as such:
 # obj = WordDictionary()
