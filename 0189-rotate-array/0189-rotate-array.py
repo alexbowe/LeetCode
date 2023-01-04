@@ -3,12 +3,15 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        def rev(xs, lo, hi):
+        def reverse(xs,lo,hi):
             while lo<hi:
-                xs[lo], xs[hi] = xs[hi], xs[lo]
-                lo+=1; hi-=1
-        N = len(nums)
-        k %= N
-        rev(nums,0,N-k-1)
-        rev(nums,N-k,N-1)
-        rev(nums,0,N-1)
+                xs[lo],xs[hi] = xs[hi],xs[lo]
+                lo+=1
+                hi-=1
+        
+        N=len(nums)
+        k%=N
+        reverse(nums,0,N-1)
+        reverse(nums,0,k-1)
+        reverse(nums,k,N-1)
+        
