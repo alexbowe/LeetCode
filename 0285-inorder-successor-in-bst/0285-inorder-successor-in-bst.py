@@ -12,9 +12,9 @@ class Solution:
             yield from inorder(root.left)
             yield root
             yield from inorder(root.right)
-        
+            
         found = False
-        for n in inorder(root):
-            if found: return n
-            if n == p: found = True
+        for x in inorder(root):
+            if found: return x
+            found = x == p
         return None
