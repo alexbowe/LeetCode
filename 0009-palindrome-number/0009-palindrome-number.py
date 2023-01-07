@@ -1,12 +1,17 @@
 class Solution:
     def isPalindrome(self, x: int) -> bool:
-        if x == 0: return True
         if x < 0: return False
         
         def digits(x):
-            while x: yield x%10; x//=10
+            if not x: yield 0
+            while x:
+                yield x%10
+                x//=10
+        
         def reverse(x):
-            return reduce(lambda a,b: a*10+b, digits(x))
+            result = 0
+            for d in digits(x):
+                result = result*10 + d
+            return result
         
-        return x == reverse(x)
-        
+        return reverse(x)==x
