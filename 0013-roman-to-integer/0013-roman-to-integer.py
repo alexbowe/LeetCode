@@ -1,7 +1,6 @@
 class Solution:
     def romanToInt(self, s: str) -> int:
-        mapping = {
-            # Singulars
+        d = {
             "I": 1,
             "V": 5,
             "X": 10,
@@ -10,7 +9,6 @@ class Solution:
             "D": 500,
             "M": 1000,
             
-            # Subtractions
             "IV": 4,
             "IX": 9,
             "XL": 40,
@@ -21,7 +19,11 @@ class Solution:
         
         result = 0
         while s:
-            symbol = s[:2] if s[:2] in mapping else s[:1]
-            result += mapping[symbol]
-            s = s[len(symbol):]
+            if s[:2] in d:
+                result += d[s[:2]]
+                s = s[2:]
+            else:
+                result += d[s[:1]]
+                s = s[1:]
         return result
+            
