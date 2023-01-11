@@ -4,13 +4,13 @@ class Solution:
         while lo<=hi:
             mid = lo+(hi-lo)//2
             
-            mid_left    = nums[0] <= nums[mid]            
+            mid_left = nums[0] <= nums[mid]
             target_left = nums[0] <= target
-            same_side   = mid_left == target_left
-            sentinel    = float("inf") if target_left else -float("inf")
-            x           = nums[mid] if same_side else sentinel
+            same_side = mid_left == target_left
+            sentinel = float("inf") if target_left else -float("inf")
+            num = nums[mid] if same_side else sentinel
             
-            if   x == target: return mid
-            elif  x < target: lo += 1
-            else            : hi -= 1
+            if num == target: return mid
+            if num < target: lo = mid+1
+            else: hi = mid-1
         return -1
