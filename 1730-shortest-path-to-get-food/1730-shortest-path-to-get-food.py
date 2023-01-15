@@ -13,7 +13,7 @@ class Solution:
         FREE = "O"
         OBSTACLE = "X"
         
-        level = [(r,c) for r,c in product(range(H),range(W)) if grid[r][c] == START]
+        level = [next((r,c) for r,c in product(range(H),range(W)) if grid[r][c] == START)]
         seen = set()
         length = 0
         while level:
