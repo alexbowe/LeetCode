@@ -1,5 +1,5 @@
 class Solution:
     def sortedSquares(self, nums: List[int]) -> List[int]:
-        left = [x*x for x in nums if x < 0]
+        left = [x*x for x in nums if x < 0][::-1]
         right = [x*x for x in nums if x >= 0]
-        return heapq.merge(reversed(left), right)
+        return heapq.merge(left,right)
