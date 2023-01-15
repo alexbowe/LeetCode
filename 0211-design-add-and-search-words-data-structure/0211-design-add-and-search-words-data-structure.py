@@ -6,9 +6,7 @@ class WordDictionary:
     def addWord(self, word: str) -> None:
         if not word: self._root["$"]; return
         self._root[word[0]].addWord(word[1:])
-        self.search.cache_clear()
 
-    @cache
     def search(self, word: str) -> bool:
         if not word: return "$" in self._root
         if word[0] == ".": return any(x.search(word[1:]) for x in self._root.values())
