@@ -1,10 +1,11 @@
 class Solution:
     def backspaceCompare(self, s: str, t: str) -> bool:
-        def backspace(s):
-            xs = []
-            for c in s:
-                if c=="#": xs = xs[:-1]; continue
-                xs.append(c)
-            return "".join(xs)
+        def apply(s):
+            result = []
+            for x in s:
+                if x == "#":
+                    if result: result.pop(); continue
+                else: result.append(x)
+            return "".join(result)
         
-        return backspace(s) == backspace(t)
+        return apply(s) == apply(t)
