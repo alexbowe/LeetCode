@@ -5,10 +5,10 @@ class Solution:
                 yield x%10
                 x//=10
         
-        sign = -1 if x <0 else +1
-        x = abs(x)
-        reverse = 0
-        for d in digits(x):
-            reverse = reverse*10 + d
+        def reverse(x):
+            return reduce(lambda a,b: a*10 + b, digits(x), 0)
         
-        return sign*reverse if -2**31 <= sign*reverse <= 2**31-1 else 0
+        sign = 1 if x>=0 else -1
+        x = sign*x
+        result = sign*reverse(x)
+        return result if -2**31 <= result <= 2**31-1 else 0
