@@ -1,29 +1,33 @@
 class Solution:
     def romanToInt(self, s: str) -> int:
-        d = {
+        m = {
             "I": 1,
             "V": 5,
             "X": 10,
             "L": 50,
             "C": 100,
             "D": 500,
-            "M": 1000,
-            
-            "IV": 4,
-            "IX": 9,
-            "XL": 40,
-            "XC": 90,
-            "CD": 400,
-            "CM": 900,
+            "M": 1000
         }
         
+        replacements = [
+            ("IV", "iiii"),
+            ("IX", "Viiii"),
+            ("XL", "xxxx"),
+            ("XC", "Lxxxx"),
+            ("CD", "cccc"),
+            ("CM", "Dcccc"),
+            ("i", "I"),
+            ("x", "X"),
+            ("c", "C"),
+        ]
+        
+        for a,b in replacements:
+            s = s.replace(a,b)
+        
         result = 0
-        while s:
-            if s[:2] in d:
-                result += d[s[:2]]
-                s = s[2:]
-            else:
-                result += d[s[:1]]
-                s = s[1:]
+        for x in s:
+            result += m[x]
+        
         return result
-            
+        
