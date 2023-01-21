@@ -10,12 +10,11 @@ class Solution:
                 yield xs
                 xs = xs.next
         
-        merged = heapq.merge(*[iterlist(xs) for xs in lists], key=lambda x:x.val)
+        merged = heapq.merge(*[iterlist(l) for l in lists], key=lambda x:x.val)
         
         head = ListNode()
         prev = head
-        for curr in merged:
-            prev.next = curr
-            prev = curr
-            curr = curr.next
+        for x in merged:
+            prev.next = x
+            prev = x
         return head.next
