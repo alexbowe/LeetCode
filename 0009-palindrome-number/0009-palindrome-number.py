@@ -3,15 +3,14 @@ class Solution:
         if x < 0: return False
         
         def digits(x):
-            if not x: yield 0
             while x:
                 yield x%10
                 x//=10
         
         def reverse(x):
-            result = 0
+            r = 0
             for d in digits(x):
-                result = result*10 + d
-            return result
+                r = r*10 + d
+            return r
         
-        return reverse(x)==x
+        return reverse(x) == x
