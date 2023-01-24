@@ -4,8 +4,8 @@ class WordDictionary:
         self._root = collections.defaultdict(WordDictionary)
 
     def addWord(self, word: str) -> None:
-        if not word: self._root["$"]; return
-        self._root[word[0]].addWord(word[1:])
+        if not word: self._root["$"]
+        else: self._root[word[0]].addWord(word[1:])
 
     def search(self, word: str) -> bool:
         if not word: return "$" in self._root
