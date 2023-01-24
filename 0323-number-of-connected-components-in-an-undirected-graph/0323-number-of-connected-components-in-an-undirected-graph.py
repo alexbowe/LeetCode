@@ -5,7 +5,7 @@ class UnionFind:
     
     def find(self, x):
         if x not in self._parent: self._parent[x] = x
-        if self._parent[x] == x: return x
+        if x == self._parent[x]: return x
         self._parent[x] = self.find(self._parent[x])
         return self._parent[x]
     
@@ -15,10 +15,10 @@ class UnionFind:
         x,y = sorted([x,y], key=self._rank.__getitem__)
         self._parent[y] = x
         self._rank[x] += self._rank[x] == self._rank[y]
-        
+    
     def count(self):
         return sum(x==p for x,p in self._parent.items())
-
+    
 class Solution:
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
         uf = UnionFind()
