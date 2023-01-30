@@ -1,10 +1,15 @@
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        words = set(wordDict)
-        level = {s}
         seen = {s}
-        while level:
-            if "" in level: return True
-            level = {x[len(w):] for x in level for w in words if x.startswith(w)}
-            seen.update(level)
+        q = [s]
+        
+        while q:
+            curr = q.pop()
+            if curr == "": return True
+            for w in wordDict:
+                if not curr.startswith(w): continue
+                new_word = curr[len(w):]
+                if new_word in seen: continue
+                q.append(new_word)
+                seen.add(new_word)
         return False
