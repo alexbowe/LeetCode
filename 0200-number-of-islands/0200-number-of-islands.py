@@ -15,23 +15,26 @@ class UnionFind:
         x,y = sorted([x,y], key=self._rank.__getitem__)
         self._parent[y] = x
         self._rank[x] += self._rank[x] == self._rank[y]
-    
+        
     def count(self):
-        return sum(1 for x,p in self._parent.items() if x == p)
-    
+        return sum(x==p for x,p in self._parent.items())
+
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
         H,W = len(grid), len(grid[0])
+        uf = UnionFind()
         
         def neighbors(r,c):
-            dirs = [(-1,0),(1,0),(0,-1),(0,1)]
-            return [(r+dr,c+dc) for dr,dc in dirs if 0<=r+dr<H and 0<=c+dc<W]
+            if r-1>=0: yield (r-1,c)
+            if c-1>=0: yield (r,c-1)
+            if r+1<H:  yield (r+1,c)
+            if c+1<W:  yield (r,c+1)
         
-        uf = UnionFind()
-        for r,c in product(range(H), range(W)):
+        for r,c in product(range(H),range(W)):
             if grid[r][c] != "1": continue
             uf.find((r,c))
             for nr,nc in neighbors(r,c):
                 if grid[nr][nc] != "1": continue
                 uf.union((r,c), (nr,nc))
+        
         return uf.count()
