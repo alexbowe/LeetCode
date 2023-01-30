@@ -13,5 +13,5 @@ class Solution:
         while fast.next:
             slow = slow.next
             fast = fast.next
-        slow.next = slow.next.next
+        if slow.next: slow.next = slow.next.next
         return head
