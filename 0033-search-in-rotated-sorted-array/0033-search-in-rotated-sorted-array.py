@@ -2,15 +2,15 @@ class Solution:
     def search(self, nums: List[int], target: int) -> int:
         lo, hi = 0, len(nums)-1
         while lo<=hi:
-            mid = lo+(hi-lo)//2
+            mid = lo + (hi-lo)//2
             
-            mid_left = nums[0] <= nums[mid]
-            target_left = nums[0] <= target
-            same_side = mid_left == target_left
+            target_left = nums[0]<=target
+            mid_left = nums[0]<=nums[mid]
+            same_side = target_left == mid_left
             sentinel = float("inf") if target_left else -float("inf")
-            num = nums[mid] if same_side else sentinel
+            x = nums[mid] if same_side else sentinel
             
-            if num == target: return mid
-            if num < target: lo = mid+1
-            else: hi = mid-1
+            if  x == target: return mid
+            elif x < target: lo = mid+1
+            else: hi=mid-1
         return -1
