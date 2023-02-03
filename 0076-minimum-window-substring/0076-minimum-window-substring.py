@@ -2,7 +2,7 @@ class Solution:
     def minWindow(self, s: str, t: str) -> str:
         need = collections.Counter(t)
         missing = len(t)
-        l,L,R = 0,0,0
+        l = L = R = 0
         for r,c in enumerate(s,1):
             missing -= need[c]>0
             need[c] -= 1
