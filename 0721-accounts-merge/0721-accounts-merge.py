@@ -1,7 +1,7 @@
 class UnionFind:
     def __init__(self):
         self._parent = dict()
-        self._rank   = collections.defaultdict(int)
+        self._rank = collections.defaultdict(int)
     
     def find(self, x):
         if x not in self._parent: self._parent[x] = x
@@ -10,6 +10,7 @@ class UnionFind:
         return self._parent[x]
     
     def union(self, x, y):
+        if x == y: return
         x = self.find(x)
         y = self.find(y)
         x,y = sorted([x,y], key=self._rank.__getitem__)
@@ -20,20 +21,23 @@ class Solution:
     def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
         uf = UnionFind()
         
-        for name, *emails in accounts:
-            uf.find(emails[0])
-            for email in emails[1:]: uf.union(emails[0], email)
-        
-        mapping = collections.defaultdict(set)
-        for name, *emails in accounts:
+        for name,*emails in accounts:
             key = uf.find(emails[0])
-            mapping[key] |= set(emails)
+            for email in emails:
+                uf.union(key, email)
+        
+        m = collections.defaultdict(set)
+        for name,*emails in accounts:
+            key = uf.find(emails[0])
+            for email in emails:
+                m[key].add(email)
         
         result = []
-        for name, *emails in accounts:
+        for name,*emails in accounts:
             key = uf.find(emails[0])
-            if key not in mapping: continue
-            result.append([name, *sorted(mapping[key])])
-            del mapping[key]
-        
+            if key not in m: continue
+            ems = sorted(m[key])
+            del m[key]
+            result.append([name,*ems])
+            
         return result
