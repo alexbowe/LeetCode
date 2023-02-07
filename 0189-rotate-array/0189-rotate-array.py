@@ -3,9 +3,9 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        def reverse(xs, lo, hi):
-            xs[lo:hi] = reversed(xs[lo:hi])
-        
+        def reverse(nums, lo, hi):
+            nums[lo:hi] = reversed(nums[lo:hi])
+                
         N = len(nums)
         k %= N
         reverse(nums, 0, N)
