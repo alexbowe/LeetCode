@@ -7,27 +7,20 @@ class Solution:
             "L": 50,
             "C": 100,
             "D": 500,
-            "M": 1000
+            "M": 1000,
+            "IV": 4,
+            "IX": 9,
+            "XL": 40,
+            "XC": 90,
+            "CD": 400,
+            "CM": 900,
         }
-        
-        replacements = [
-            ("IV", "iiii"),
-            ("IX", "Viiii"),
-            ("XL", "xxxx"),
-            ("XC", "Lxxxx"),
-            ("CD", "cccc"),
-            ("CM", "Dcccc"),
-            ("i", "I"),
-            ("x", "X"),
-            ("c", "C"),
-        ]
-        
-        for a,b in replacements:
-            s = s.replace(a,b)
-        
         result = 0
-        for x in s:
-            result += m[x]
-        
+        while s:
+            symbols, s = s[:2], s[2:]
+            if symbols in m:
+                result += m[symbols]
+            else:
+                result += m[symbols[0]]
+                s = symbols[1] + s
         return result
-        
