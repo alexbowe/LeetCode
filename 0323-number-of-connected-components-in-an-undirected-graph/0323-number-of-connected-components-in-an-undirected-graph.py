@@ -8,7 +8,7 @@ class UnionFind:
         if x == self._parent[x]: return x
         self._parent[x] = self.find(self._parent[x])
         return self._parent[x]
-    
+
     def union(self, x, y):
         x = self.find(x)
         y = self.find(y)
@@ -16,9 +16,9 @@ class UnionFind:
         self._parent[y] = x
         self._rank[x] += self._rank[x] == self._rank[y]
     
-    def count(self):
-        return sum(x==p for x,p in self._parent.items())
-    
+    def sets(self):
+        return {x for x,p in self._parent.items() if x==p}
+
 class Solution:
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
         uf = UnionFind()
@@ -26,4 +26,4 @@ class Solution:
             uf.find(v)
         for u,v in edges:
             uf.union(u,v)
-        return uf.count()
+        return len(uf.sets())
