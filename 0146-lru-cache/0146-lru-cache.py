@@ -35,7 +35,7 @@ class LRUCache:
         return node.val
     
     def pop(self):
-        if not self.d: return
+        if not self.d: return # Raise exception instead
         return self.d.pop(self.list_tail.prev.remove().key)
 
     def put(self, key: int, value: int) -> None:
