@@ -34,13 +34,14 @@ class LRUCache:
         self.list_head.post_insert(node)
         return node.val
     
-    def _pop(self):
+    def pop(self):
         if not self.d: return
-        del self.d[self.list_tail.prev.remove().key]
+        return self.d.pop(self.list_tail.prev.remove().key)
 
     def put(self, key: int, value: int) -> None:
         if self.get(key) != -1: self.d[key].val = value; return
-        if len(self.d) == self.capacity: self._pop()
+        if len(self.d) == self.capacity:
+            print(self.pop())
         self.d[key] = ListNode(key=key,val=value)
         self.list_head.post_insert(self.d[key])
         
