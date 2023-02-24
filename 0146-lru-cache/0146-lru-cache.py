@@ -40,8 +40,7 @@ class LRUCache:
 
     def put(self, key: int, value: int) -> None:
         if self.get(key) != -1: self.d[key].val = value; return
-        if len(self.d) == self.capacity:
-            print(self.pop())
+        if len(self.d) == self.capacity: self.pop()
         self.d[key] = ListNode(key=key,val=value)
         self.list_head.post_insert(self.d[key])
         
