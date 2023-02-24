@@ -6,13 +6,6 @@
 #         self.right = right
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
-        """
-        0 1  2  3 4
-        
-        3 9 20 15 7  - pre
-          .
-        9 3 15 20 7  - in
-        """
         if not preorder or not inorder: return None
         x = preorder[0]
         i = inorder.index(x)
