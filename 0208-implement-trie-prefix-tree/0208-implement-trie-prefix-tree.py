@@ -1,27 +1,18 @@
-from collections import defaultdict
-
-TreeNode = lambda: defaultdict(TreeNode)
-
 class Trie:
 
     def __init__(self):
-        self._root = TreeNode()
+        self._root = collections.defaultdict(Trie)
 
     def insert(self, word: str) -> None:
-        node = self._root
-        for c in word:
-            node = node[c]
-        node["$"]
+        if not word: self._root["$"]
+        else: self._root[word[0]].insert(word[1:])
 
     def search(self, word: str) -> bool:
         return self.startsWith(word+"$")
 
     def startsWith(self, prefix: str) -> bool:
-        node = self._root
-        for c in prefix:
-            if c not in node: return False
-            node = node[c]
-        return True
+        if not prefix: return True
+        return prefix[0] in self._root and self._root[prefix[0]].startsWith(prefix[1:])
 
 
 # Your Trie object will be instantiated and called as such:
