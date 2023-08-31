@@ -1,7 +1,15 @@
 class Solution:
     def longestPalindrome(self, s: str) -> int:
-        from collections import Counter
-        c = Counter(s)
-        even = sum(n//2 for n in c.values())
-        odd = sum(n%2 for x,n in c.items())
-        return even*2 + (odd>0)
+        c = collections.Counter(s)
+
+        """
+        ccc -> 3
+        if odd, a
+        """
+
+        even = 0
+        odd = 0
+        for x,count in c.items():
+            even += count//2
+            odd += count%2
+        return 2*even + (odd>0)
