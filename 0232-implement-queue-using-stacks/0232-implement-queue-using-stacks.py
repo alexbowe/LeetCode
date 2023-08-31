@@ -13,12 +13,11 @@ class MyQueue:
 
     def peek(self) -> int:
         if not self._out:
-            while self._in:
-                self._out.append(self._in.pop())
+            while self._in: self._out.append(self._in.pop())
         return self._out[-1]
 
     def empty(self) -> bool:
-        return not (self._in or self._out)
+        return not self._in and not self._out
 
 
 # Your MyQueue object will be instantiated and called as such:
