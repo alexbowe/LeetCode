@@ -11,11 +11,7 @@ class Solution:
             yield from inorder(root.left)
             yield root
             yield from inorder(root.right)
+        pairs = itertools.pairwise(x.val for x in inorder(root))        
+        return all(a<b for a,b in pairs)
+
             
-        def pairs(xs):
-            import itertools as it
-            a,b = it.tee(xs)
-            next(b,None)
-            return zip(a,b)
-        
-        return all(a.val<b.val for a,b in pairs(inorder(root)))
