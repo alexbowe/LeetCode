@@ -5,19 +5,19 @@
 #         self.next = next
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        from heapq import merge
-        
-        def iter_list(xs):
-            while xs:
-                yield xs
-                xs = xs.next
-        
-        merged = merge(*[iter_list(list1), iter_list(list2)], key=lambda x:x.val)
-        
         head = ListNode()
         prev = head
-        for x in merged:
-            prev.next = x
-            prev = x
+
+        while list1 and list2:
+            list1, list2 = sorted([list1,list2], key=lambda x:x.val)
+            prev.next = list1
+            prev = list1
+            list1 = list1.next
+        
+        curr = list1 if list1 else list2
+        while curr:
+            prev.next = curr 
+            prev = curr
+            curr = curr.next
         
         return head.next
