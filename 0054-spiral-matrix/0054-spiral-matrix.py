@@ -3,5 +3,5 @@ class Solution:
         result = []
         while matrix:
             result.extend(matrix.pop(0))
-            matrix = [*zip(*matrix)][::-1]
+            matrix = list(zip(*matrix))[::-1]
         return result
