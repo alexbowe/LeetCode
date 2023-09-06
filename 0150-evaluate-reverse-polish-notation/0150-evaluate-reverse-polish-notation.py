@@ -1,18 +1,16 @@
 class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
-        ops = {
-            "+": lambda a,b: a+b,
-            "-": lambda a,b: a-b,
-            "*": lambda a,b: a*b,
+        f = {
+            "*": operator.mul,
+            "+": operator.add,
+            "-": operator.sub,
             "/": lambda a,b: int(a/b),
         }
-        
-        stack = []
-        for token in tokens:
-            if token not in ops: stack.append(int(token))
-            else:
-                b = stack.pop()
-                a = stack.pop()
-                stack.append(ops[token](a,b))
-        assert len(stack) == 1
-        return stack[-1]
+
+        s = []
+        for x in tokens:
+            if x in f:
+                b,a = s.pop(), s.pop()
+                s.append(f[x](a,b))
+            else: s.append(int(x))
+        return s.pop()
