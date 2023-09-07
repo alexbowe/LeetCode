@@ -4,6 +4,6 @@ class Solution:
         left  = bisect.bisect_left(nums, target, hi=pivot)
         right = bisect.bisect_left(nums, target, lo=pivot)
 
-        if  left < len(nums) and nums[left]  == target: return left
+        if  left < len(nums) and  nums[left] == target: return left
         if right < len(nums) and nums[right] == target: return right
         return -1
