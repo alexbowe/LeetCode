@@ -1,16 +1,9 @@
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        lo, hi = 0, len(nums)-1
-        while lo<=hi:
-            mid = lo + (hi-lo)//2
-            
-            target_left = nums[0]<=target
-            mid_left = nums[0]<=nums[mid]
-            same_side = target_left == mid_left
-            sentinel = float("inf") if target_left else -float("inf")
-            x = nums[mid] if same_side else sentinel
-            
-            if  x == target: return mid
-            elif x < target: lo = mid+1
-            else: hi=mid-1
+        pivot = bisect.bisect_left(nums, True, key=lambda x: x<=nums[-1])
+        left  = bisect.bisect_left(nums, target, hi=pivot)
+        right = bisect.bisect_left(nums, target, lo=pivot)
+
+        if  left < len(nums) and nums[left]  == target: return left
+        if right < len(nums) and nums[right] == target: return right
         return -1
