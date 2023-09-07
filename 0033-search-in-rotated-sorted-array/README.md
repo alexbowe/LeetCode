@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/search-in-rotated-sorted-array/">33. Search in Rotated Sorted Array</a></h2><h3>Medium</h3><hr><div data-read-aloud-multi-block="true"><p>There is an integer array <code>nums</code> sorted in ascending order (with <strong>distinct</strong> values).</p>
+<h2><a href="https://leetcode.com/problems/search-in-rotated-sorted-array">33. Search in Rotated Sorted Array</a></h2><h3>Medium</h3><hr><p>There is an integer array <code>nums</code> sorted in ascending order (with <strong>distinct</strong> values).</p>
 
 <p>Prior to being passed to your function, <code>nums</code> is <strong>possibly rotated</strong> at an unknown pivot index <code>k</code> (<code>1 &lt;= k &lt; nums.length</code>) such that the resulting array is <code>[nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]]</code> (<strong>0-indexed</strong>). For example, <code>[0,1,2,4,5,6,7]</code> might be rotated at pivot index <code>3</code> and become <code>[4,5,6,7,0,1,2]</code>.</p>
 
@@ -22,9 +22,8 @@
 
 <ul>
 	<li><code>1 &lt;= nums.length &lt;= 5000</code></li>
-	<li><code>-10<sup style="">4</sup> &lt;= nums[i] &lt;= 10<sup style="">4</sup></code></li>
+	<li><code>-10<sup>4</sup> &lt;= nums[i] &lt;= 10<sup>4</sup></code></li>
 	<li>All values of <code>nums</code> are <strong>unique</strong>.</li>
 	<li><code>nums</code> is an ascending array that is possibly rotated.</li>
-	<li><code>-10<sup style="">4</sup> &lt;= target &lt;= 10<sup style="">4</sup></code></li>
+	<li><code>-10<sup>4</sup> &lt;= target &lt;= 10<sup>4</sup></code></li>
 </ul>
-</div>
