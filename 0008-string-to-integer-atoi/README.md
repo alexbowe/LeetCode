@@ -1,12 +1,12 @@
-<h2><a href="https://leetcode.com/problems/string-to-integer-atoi/">8. String to Integer (atoi)</a></h2><h3>Medium</h3><hr><div><p>Implement the <code>myAtoi(string s)</code> function, which converts a string to a 32-bit signed integer (similar to C/C++'s <code>atoi</code> function).</p>
+<h2><a href="https://leetcode.com/problems/string-to-integer-atoi/">8. String to Integer (atoi)</a></h2><h3>Medium</h3><hr><p>Implement the <code>myAtoi(string s)</code> function, which converts a string to a 32-bit signed integer (similar to C/C++&#39;s <code>atoi</code> function).</p>
 
 <p>The algorithm for <code>myAtoi(string s)</code> is as follows:</p>
 
 <ol>
 	<li>Read in and ignore any leading whitespace.</li>
-	<li>Check if the next character (if not already at the end of the string) is <code>'-'</code> or <code>'+'</code>. Read this character in if it is either. This determines if the final result is negative or positive respectively. Assume the result is positive if neither is present.</li>
+	<li>Check if the next character (if not already at the end of the string) is <code>&#39;-&#39;</code> or <code>&#39;+&#39;</code>. Read this character in if it is either. This determines if the final result is negative or positive respectively. Assume the result is positive if neither is present.</li>
 	<li>Read in next the characters until the next non-digit character or the end of the input is reached. The rest of the string is ignored.</li>
-	<li>Convert these digits into an integer (i.e. <code>"123" -&gt; 123</code>, <code>"0032" -&gt; 32</code>). If no digits were read, then the integer is <code>0</code>. Change the sign as necessary (from step 2).</li>
+	<li>Convert these digits into an integer (i.e. <code>&quot;123&quot; -&gt; 123</code>, <code>&quot;0032&quot; -&gt; 32</code>). If no digits were read, then the integer is <code>0</code>. Change the sign as necessary (from step 2).</li>
 	<li>If the integer is out of the 32-bit signed integer range <code>[-2<sup>31</sup>, 2<sup>31</sup> - 1]</code>, then clamp the integer so that it remains in the range. Specifically, integers less than <code>-2<sup>31</sup></code> should be clamped to <code>-2<sup>31</sup></code>, and integers greater than <code>2<sup>31</sup> - 1</code> should be clamped to <code>2<sup>31</sup> - 1</code>.</li>
 	<li>Return the integer as the final result.</li>
 </ol>
@@ -14,21 +14,22 @@
 <p><strong>Note:</strong></p>
 
 <ul>
-	<li>Only the space character <code>' '</code> is considered a whitespace character.</li>
+	<li>Only the space character <code>&#39; &#39;</code> is considered a whitespace character.</li>
 	<li><strong>Do not ignore</strong> any characters other than the leading whitespace or the rest of the string after the digits.</li>
 </ul>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre><strong>Input:</strong> s = "42"
+<pre>
+<strong>Input:</strong> s = &quot;42&quot;
 <strong>Output:</strong> 42
 <strong>Explanation:</strong> The underlined characters are what is read in, the caret is the current reader position.
-Step 1: "42" (no characters read because there is no leading whitespace)
+Step 1: &quot;42&quot; (no characters read because there is no leading whitespace)
          ^
-Step 2: "42" (no characters read because there is neither a '-' nor '+')
+Step 2: &quot;42&quot; (no characters read because there is neither a &#39;-&#39; nor &#39;+&#39;)
          ^
-Step 3: "<u>42</u>" ("42" is read in)
+Step 3: &quot;<u>42</u>&quot; (&quot;42&quot; is read in)
            ^
 The parsed integer is 42.
 Since 42 is in the range [-2<sup>31</sup>, 2<sup>31</sup> - 1], the final result is 42.
@@ -36,14 +37,15 @@ Since 42 is in the range [-2<sup>31</sup>, 2<sup>31</sup> - 1], the final result
 
 <p><strong class="example">Example 2:</strong></p>
 
-<pre><strong>Input:</strong> s = "   -42"
+<pre>
+<strong>Input:</strong> s = &quot;   -42&quot;
 <strong>Output:</strong> -42
 <strong>Explanation:</strong>
-Step 1: "<u>   </u>-42" (leading whitespace is read and ignored)
+Step 1: &quot;<u>   </u>-42&quot; (leading whitespace is read and ignored)
             ^
-Step 2: "   <u>-</u>42" ('-' is read, so the result should be negative)
+Step 2: &quot;   <u>-</u>42&quot; (&#39;-&#39; is read, so the result should be negative)
              ^
-Step 3: "   -<u>42</u>" ("42" is read in)
+Step 3: &quot;   -<u>42</u>&quot; (&quot;42&quot; is read in)
                ^
 The parsed integer is -42.
 Since -42 is in the range [-2<sup>31</sup>, 2<sup>31</sup> - 1], the final result is -42.
@@ -51,14 +53,15 @@ Since -42 is in the range [-2<sup>31</sup>, 2<sup>31</sup> - 1], the final resul
 
 <p><strong class="example">Example 3:</strong></p>
 
-<pre><strong>Input:</strong> s = "4193 with words"
+<pre>
+<strong>Input:</strong> s = &quot;4193 with words&quot;
 <strong>Output:</strong> 4193
 <strong>Explanation:</strong>
-Step 1: "4193 with words" (no characters read because there is no leading whitespace)
+Step 1: &quot;4193 with words&quot; (no characters read because there is no leading whitespace)
          ^
-Step 2: "4193 with words" (no characters read because there is neither a '-' nor '+')
+Step 2: &quot;4193 with words&quot; (no characters read because there is neither a &#39;-&#39; nor &#39;+&#39;)
          ^
-Step 3: "<u>4193</u> with words" ("4193" is read in; reading stops because the next character is a non-digit)
+Step 3: &quot;<u>4193</u> with words&quot; (&quot;4193&quot; is read in; reading stops because the next character is a non-digit)
              ^
 The parsed integer is 4193.
 Since 4193 is in the range [-2<sup>31</sup>, 2<sup>31</sup> - 1], the final result is 4193.
@@ -69,6 +72,5 @@ Since 4193 is in the range [-2<sup>31</sup>, 2<sup>31</sup> - 1], the final resu
 
 <ul>
 	<li><code>0 &lt;= s.length &lt;= 200</code></li>
-	<li><code>s</code> consists of English letters (lower-case and upper-case), digits (<code>0-9</code>), <code>' '</code>, <code>'+'</code>, <code>'-'</code>, and <code>'.'</code>.</li>
+	<li><code>s</code> consists of English letters (lower-case and upper-case), digits (<code>0-9</code>), <code>&#39; &#39;</code>, <code>&#39;+&#39;</code>, <code>&#39;-&#39;</code>, and <code>&#39;.&#39;</code>.</li>
 </ul>
-</div>
