@@ -8,16 +8,13 @@ class UnionFind:
         return x in self._parent
     
     def find(self, x):
-        if x not in self._parent:
-            self._parent[x] = x
-            self._count += 1
-        if x == self._parent[x]: return x
+        if x not in self._parent: self._count += 1
+        if x == self._parent.setdefault(x,x): return x
         self._parent[x] = self.find(self._parent[x])
         return self._parent[x]
     
     def union(self, x, y):
-        x = self.find(x)
-        y = self.find(y)
+        x,y = self.find(x), self.find(y)
         if x == y: return
         x,y = sorted([x,y], key=self._rank.__getitem__)
         self._parent[x] = y
