@@ -1,15 +1,17 @@
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        seen = {s}
-        q = [s]
-        
-        while q:
-            curr = q.pop()
-            if curr == "": return True
-            for w in wordDict:
-                if not curr.startswith(w): continue
-                new_word = curr[len(w):]
-                if new_word in seen: continue
-                q.append(new_word)
-                seen.add(new_word)
+        seen = {""}
+        prefixes = {""}
+
+        while prefixes:
+            if s in prefixes: return True
+            prefixes = {
+                p + w
+                for p in prefixes
+                for w in wordDict
+                if s.startswith(p + w)
+                and p + w not in seen
+            }
+            seen |= prefixes
+
         return False
