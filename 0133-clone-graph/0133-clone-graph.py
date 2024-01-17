@@ -8,17 +8,13 @@ class Node:
 
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
-        if not node: return None
-        
-        out_nodes = dict()
-        stack = [node]
-        while stack:
-            curr = stack.pop()
-            if curr.val not in out_nodes: out_nodes[curr.val] = Node(val=curr.val)
+        def helper(curr, nodes=None):
+            if not curr: return None
+            nodes = nodes or dict()
+            if curr.val in nodes: return nodes[curr.val]
+
+            new_node = nodes.setdefault(curr.val, Node(curr.val))
             for n in curr.neighbors:
-                if n.val not in out_nodes:
-                    out_nodes[n.val] = Node(val=n.val)
-                    stack.append(n)
-                out_nodes[curr.val].neighbors.append(out_nodes[n.val])
-        
-        return out_nodes[node.val]
+                new_node.neighbors.append(helper(n, nodes))
+            return new_node
+        return helper(node)
