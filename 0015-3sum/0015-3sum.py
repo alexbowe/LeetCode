@@ -1,21 +1,16 @@
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        def twoSum(xs, start, target):
-            lo,hi = start, len(xs)-1
-            while lo<hi:
-                s = xs[lo] + xs[hi]
-                if   s < target: lo+=1
-                elif s > target: hi-=1
-                else:
-                    yield (lo, hi)
-                    lo+=1; hi-=1;
-                    while lo<hi and xs[lo]==xs[lo-1]: lo+=1
-        
         nums.sort()
+        
+        def twoSum(nums, start, target):
+            for i in range(start, len(nums)-1):
+                if i>start and nums[i-1]==nums[i]: continue
+                j = bisect.bisect_left(nums, target-nums[i], lo=i+1)
+                if j<len(nums) and nums[i]+nums[j]==target: yield (i,j)
 
         result = []
         for i in range(len(nums)-2):
-            if i>0 and nums[i] == nums[i-1]: continue
+            if i>0 and nums[i-1]==nums[i]: continue
             for j,k in twoSum(nums, i+1, -nums[i]):
-                result.append([nums[i],nums[j], nums[k]])
+                result.append((nums[i], nums[j], nums[k]))
         return result
