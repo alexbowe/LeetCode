@@ -5,12 +5,6 @@
 #         self.next = next
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
-      """
-          
-              f
-      1 2 5 2 1
-          s
-      """
       def iter_list(curr):
         while curr:
           yield curr
@@ -30,7 +24,6 @@ class Solution:
         slow = slow.next
         fast = fast.next.next
       
-      # Reverse slow (which is second half of list)
       tail = reverse_list(slow)
 
       for x,y in zip(iter_list(head), iter_list(tail)):
