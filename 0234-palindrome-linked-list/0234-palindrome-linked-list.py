@@ -26,7 +26,4 @@ class Solution:
       
       tail = reverse_list(slow)
 
-      for x,y in zip(iter_list(head), iter_list(tail)):
-        if x.val != y.val: return False
-      
-      return True
+      return all(x.val==y.val for x,y in zip(iter_list(head), iter_list(tail)))
