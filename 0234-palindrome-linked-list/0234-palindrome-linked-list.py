@@ -5,12 +5,6 @@
 #         self.next = next
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
-        """
-            s
-        1 2 2 1
-                f
-        """
-
         def iter_list(curr):
             while curr:
                 yield curr
