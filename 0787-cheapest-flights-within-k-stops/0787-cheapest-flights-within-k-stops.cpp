@@ -4,8 +4,8 @@ public:
         constexpr int infinity = numeric_limits<int>::max();
 
         vector<int> prices(n, infinity);
-        auto new_prices = prices;
         prices[src] = 0;
+        auto new_prices = prices;
 
         for (size_t i=0; i<k+1; ++i) {
             for (const auto& row : flights) {
