@@ -60,6 +60,8 @@ class Circle:
         return pt
     
     def random_fast(self):
+        # Finds random polar point on circumference of random inner circle
+        # and converts it to cartesian coordinates.
         theta = random.uniform(0, 2*math.pi)
         R = self.radius*(random.uniform(0,1))**0.5
         return Point(
