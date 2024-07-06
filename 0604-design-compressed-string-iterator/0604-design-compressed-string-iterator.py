@@ -5,10 +5,10 @@ def decode(s):
         if x.isdigit():
             count = 10 * count + int(x)
         else:
-            yield from char * count
+            for _ in range(count): yield char
             count = 0
             char = x
-    yield from char * count
+    for _ in range(count): yield char
 
 class StringIterator:
 
