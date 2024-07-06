@@ -58,6 +58,14 @@ class Circle:
         while pt not in self:
             pt = box.random()
         return pt
+    
+    def random_fast(self):
+        theta = random.uniform(0, 2*math.pi)
+        R = self.radius*(random.uniform(0,1))**0.5
+        return Point(
+            self.center.x + R*math.cos(theta),
+            self.center.y + R*math.sin(theta),
+        )
 
 class Solution:
 
@@ -65,7 +73,7 @@ class Solution:
         self._circle = Circle(Point(x_center, y_center), radius)
 
     def randPoint(self) -> List[float]:
-        return [*self._circle.random()]
+        return [*self._circle.random_fast()]
 
 # Your Solution object will be instantiated and called as such:
 # obj = Solution(radius, x_center, y_center)
