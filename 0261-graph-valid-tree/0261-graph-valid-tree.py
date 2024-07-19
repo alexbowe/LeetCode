@@ -1,17 +1,10 @@
 def is_tree(g):
-    # Acyclic
-    # Connected
-    frontier = {0}
-    seen = {0}
-
-    while frontier:
-        curr = frontier.pop()
-        while g[curr]:
-            n = g[curr].pop()
-            if n in seen: continue
-            frontier.add(n)
-            seen.add(n)
-        del g[curr]
+    q = {0}
+    while q:
+        v = q.pop()
+        if v not in g: continue
+        q |= g[v]
+        del g[v]
     return not g
 
 def make_graph(n, edges):
