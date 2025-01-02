@@ -1,0 +1,21 @@
+class Solution:
+    def isBipartite(self, graph: List[List[int]]) -> bool:
+        colors = dict()
+
+        def is_bipartite(root):
+            if root in colors: return True
+
+            color = 0
+            level = {root}
+            while level:
+                new_level = set()
+                for u in level:
+                    colors[u] = color
+                    for v in graph[u]:
+                        if v not in colors: new_level.add(v)
+                        elif colors[v] == color: return False
+                color ^= 1
+                level = new_level
+            return True
+        
+        return all(is_bipartite(v) for v in range(len(graph)))
